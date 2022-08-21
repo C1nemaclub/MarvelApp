@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Recent from './pages/Recent';
 import About from './pages/About';
+import SingleCharacter from './pages/SingleCharacter';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/recent' element={<Recent />} />
           <Route path='/about' element={<About />} />
+          <Route path='/about/:id' element={<SingleCharacter />} />
         </Routes>
       </Router>
     </div>

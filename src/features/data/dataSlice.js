@@ -25,6 +25,22 @@ export const getCharacters = createAsyncThunk(
   }
 );
 
+export const getSingleCharacter = createAsyncThunk(
+  'chars/getOne',
+  async (charId, thunkAPI) => {
+    try {
+      return await dataService.getSingleCharacter(charId);
+    } catch (e) {
+      const message =
+        (e.response && e.response.data && e.response.data.message) ||
+        e.message ||
+        e.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const charsSlice = createSlice({
   name: 'chars',
   initialState: initialState,

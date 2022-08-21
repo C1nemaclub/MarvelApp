@@ -13,6 +13,7 @@ export default function Home() {
       const response = await axios.get(
         `http://gateway.marvel.com/v1/public/characters?ts=1&apikey=${publicKey}&hash=${hash}&limit=10`
       );
+
       setApiData(response.data.data.results);
     }
     getData();
