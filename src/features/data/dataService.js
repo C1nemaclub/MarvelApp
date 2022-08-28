@@ -3,9 +3,12 @@ const hash = 'af05cbeffabc192e13f2c39fed8e8c87';
 
 const publicKey = '6735dc87e02eb6a2654a69e50aea46b5';
 
-const getCharacters = async () => {
+const getCharacters = async (requestParameters) => {
+  const offset = requestParameters.currentPage * 100;
+  const type = requestParameters.type;
+
   const response = await axios.get(
-    `http://gateway.marvel.com/v1/public/characters?ts=1&apikey=${publicKey}&hash=${hash}&limit=25`
+    `http://gateway.marvel.com/v1/public/${type}?ts=1&apikey=${publicKey}&hash=${hash}&limit=100&offset=${offset}`
   );
 
   const rawCharacters = response.data.data.results;
@@ -20,13 +23,22 @@ const getSingleCharacter = async (charId) => {
   const response = await axios.get(
     `http://gateway.marvel.com/v1/public/characters/${charId}?ts=1&apikey=${publicKey}&hash=${hash}`
   );
-  console.log(response.data.data.results);
+
+  return response.data.data.results;
+};
+
+const searchCharacter = async (query) => {
+  const response = await axios.get(
+    `http://gateway.marvel.com/v1/public/characters?ts=1&apikey=${publicKey}&hash=${hash}&nameStartsWith=${query}`
+  );
+
   return response.data.data.results;
 };
 
 const dataService = {
   getCharacters,
   getSingleCharacter,
+  searchCharacter,
 };
 
 export default dataService;

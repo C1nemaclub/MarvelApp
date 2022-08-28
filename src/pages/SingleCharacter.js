@@ -1,8 +1,11 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 export default function SingleCharacter() {
+  const { id } = useParams();
+  console.log(id);
+
   const { state } = useLocation();
   const char = state;
   return (

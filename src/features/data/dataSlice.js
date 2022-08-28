@@ -11,9 +11,25 @@ const initialState = {
 
 export const getCharacters = createAsyncThunk(
   'chars/getAll',
-  async (_, thunkAPI) => {
+  async (requestParameters, thunkAPI) => {
     try {
-      return await dataService.getCharacters();
+      return await dataService.getCharacters(requestParameters);
+    } catch (e) {
+      const message =
+        (e.response && e.response.data && e.response.data.message) ||
+        e.message ||
+        e.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const searchCharacter = createAsyncThunk(
+  'chars/search',
+  async (requestParameters, thunkAPI) => {
+    try {
+      return await dataService.searchCharacter(requestParameters);
     } catch (e) {
       const message =
         (e.response && e.response.data && e.response.data.message) ||
@@ -58,6 +74,19 @@ const charsSlice = createSlice({
         state.chars = action.payload;
       })
       .addCase(getCharacters.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.msg = action.payload;
+      })
+      .addCase(searchCharacter.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(searchCharacter.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.chars = action.payload;
+      })
+      .addCase(searchCharacter.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.msg = action.payload;
