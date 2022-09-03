@@ -1,14 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@200;400;600;800&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Karla', sans-serif;
 }
 
 body {
   min-height: 100vh;
   height: 100%;
   width: 100%;
-  background: #363636;
   position: relative;
   background: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),
     url('./assets/wall.jpg');

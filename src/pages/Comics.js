@@ -2,12 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CharCard from '../components/CharCard';
 import { getCharacters, searchCharacter } from '../features/data/dataSlice';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import '../styles/Comics/comics.scss';
 
 export default function Comics() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(0);
+  const [searchComics, setsearchComics] = useState({ comicName: '' });
+
+  function onChange(e) {
+    const { name, value } = e.target;
+    console.log(value);
+
+    setsearchComics((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  }
 
   const { chars, isLoading, isSuccess, isError, msg } = useSelector(
     (state) => state.chars
@@ -22,6 +36,24 @@ export default function Comics() {
   }, []);
 
   function viewComic() {}
+
+  function onSearch(e) {
+    e.preventDefault();
+    const requestParameters = {
+      type: 'comics',
+      characterName: searchComics.comicName,
+    };
+    if (searchComics.comicName === '') {
+      dispatch(getCharacters());
+      return;
+    }
+    dispatch(searchCharacter(requestParameters));
+    setsearchComics({ comicName: '' });
+  }
+
+  function viewComic(comic) {
+    navigate(`/comics/${comic.id}`, { state: { char: comic } });
+  }
   const charCards = chars.map((item) => {
     return (
       <CharCard
@@ -40,8 +72,24 @@ export default function Comics() {
 
   return (
     <>
-      <h1>Comics</h1>
-      <div className='card-grid'>{charCards}</div>
+      <div className='page comics-page'>
+        <div className='content'>
+          <div className='form-container'>
+            <form onSubmit={(e) => onSearch(e)}>
+              <input
+                type='search'
+                name='comicName'
+                placeholder='Search Comic'
+                onChange={(e) => onChange(e)}
+                value={searchComics.comicName}
+              />
+              <button>Search</button>
+            </form>
+          </div>
+          <h1>Comics</h1>
+          <div className='card-grid'>{charCards}</div>
+        </div>
+      </div>
     </>
   );
 }

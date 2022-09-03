@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import Comics from './pages/Comics';
 import Characters from './pages/Characters';
 import SingleCharacter from './pages/SingleCharacter';
+import SingleComic from './pages/SingleComic';
+import './styles/Layout/layout.scss';
 
 function App() {
   return (
@@ -13,7 +15,10 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/comics' element={<Comics />} />
+          <Route path='/comics'>
+            <Route index element={<Comics />} />
+            <Route path=':id' element={<SingleComic />} />
+          </Route>
           <Route path='/characters'>
             <Route index element={<Characters />} />
             <Route path=':id' element={<SingleCharacter />} />

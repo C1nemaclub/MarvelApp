@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import {
-  getCharacters,
-  getSingleCharacter,
-  searchCharacter,
-} from '../features/data/dataSlice';
+import { getCharacters, searchCharacter } from '../features/data/dataSlice';
 import CharCard from '../components/CharCard';
 import '../styles/About/index.css';
 import Pagination from '../components/Pagination';
@@ -65,12 +61,20 @@ export default function Characters() {
 
   function onSearch(e) {
     e.preventDefault();
+    const requestParameters = {
+      type: 'characters',
+      characterName: searchChar.charName,
+    };
     if (searchChar.charName === '') {
-      dispatch(getCharacters());
+      const requestParameters = {
+        currentPage: 0,
+        type: 'characters',
+      };
+      dispatch(getCharacters(requestParameters));
       setShowPagination(true);
       return;
     }
-    dispatch(searchCharacter(searchChar.charName));
+    dispatch(searchCharacter(requestParameters));
     setShowPagination(false);
     setSearchChar({ charName: '' });
   }
@@ -78,35 +82,42 @@ export default function Characters() {
   function changePage(page) {
     setCurrentPage(page);
   }
+
   if (isLoading) {
     return <div className='loader'></div>;
   }
   return (
     <>
       <div className='page about-page'>
-        <h1>About</h1>
-        {msg && <p>{msg}</p>}
-        <div className='form-container'>
-          <form onSubmit={(e) => onSearch(e)}>
-            <input
-              type='search'
-              name='charName'
-              placeholder='Search Character'
-              onChange={(e) => onChange(e)}
-              value={searchChar.charName}
-            />
-            <button>Search</button>
-          </form>
+        <div className='content'>
+          <div className='form-container'>
+            <form onSubmit={(e) => onSearch(e)}>
+              <input
+                type='search'
+                name='charName'
+                placeholder='Search Character'
+                onChange={(e) => onChange(e)}
+                value={searchChar.charName}
+              />
+              <button>Search</button>
+            </form>
+          </div>
+          <h1>Characters</h1>
+          {showPagination && (
+            <div className='pagination'>
+              <Pagination
+                totalCharacters={totalChars}
+                changePage={changePage}
+              />
+            </div>
+          )}
+          {chars.length === 0 && (
+            <h2 style={{ color: 'white' }}>
+              Not Characters Found under {searchChar.charName}
+            </h2>
+          )}
+          <div className='card-grid'>{charCards}</div>
         </div>
-        {showPagination && (
-          <Pagination totalCharacters={totalChars} changePage={changePage} />
-        )}
-        {chars.length === 0 && (
-          <h2 style={{ color: 'white' }}>
-            Not Characters Found under {searchChar.charName}
-          </h2>
-        )}
-        <div className='card-grid'>{charCards}</div>
       </div>
     </>
   );

@@ -1,0 +1,26 @@
+.comics-page {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin-top: 60px;
+  padding: 2rem;
+}
+
+.comics-page .content .form-container {
+  margin-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.comics-page .content h1 {
+  color: #fff;
+  font-size: 2.5rem;
+}
+/*# sourceMappingURL=comics.css.map */
