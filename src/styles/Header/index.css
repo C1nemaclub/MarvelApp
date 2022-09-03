@@ -19,6 +19,10 @@ nav ul {
   gap: 2rem;
 }
 
+nav li {
+  list-style-type: none;
+}
+
 nav li a {
   color: white;
   text-decoration: none;
@@ -43,5 +47,17 @@ nav li a::after {
 
 nav li a:hover::after {
   width: 100%;
+}
+
+.active::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background: red;
+  width: 100%;
+  height: 2px;
 }
 /*# sourceMappingURL=index.css.map */
