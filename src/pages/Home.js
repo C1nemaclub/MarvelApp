@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Home/home.scss';
 
 export default function Home() {
@@ -7,7 +8,7 @@ export default function Home() {
       <div className='hero'>
         <h1>SEARCH FOR YOUR FAVORITE MARVEL CHARACTERS</h1>
         <button className='btn btn-primary'>
-          <a href='/characters?page=1'>Explore</a>
+          <Link to='/characters?page=1'>Explore</Link>
         </button>
       </div>
     </div>
