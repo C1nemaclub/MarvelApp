@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/C1nemaclub.github.io/MarvelApp/static/css/main.63bb93d5.css",
+    "main.js": "/C1nemaclub.github.io/MarvelApp/static/js/main.ae18e18b.js",
+    "static/js/787.c1112931.chunk.js": "/C1nemaclub.github.io/MarvelApp/static/js/787.c1112931.chunk.js",
+    "static/media/wall.jpg": "/C1nemaclub.github.io/MarvelApp/static/media/wall.673ff36ecda29e4172db.jpg",
+    "index.html": "/C1nemaclub.github.io/MarvelApp/index.html",
+    "main.63bb93d5.css.map": "/C1nemaclub.github.io/MarvelApp/static/css/main.63bb93d5.css.map",
+    "main.ae18e18b.js.map": "/C1nemaclub.github.io/MarvelApp/static/js/main.ae18e18b.js.map",
+    "787.c1112931.chunk.js.map": "/C1nemaclub.github.io/MarvelApp/static/js/787.c1112931.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.63bb93d5.css",
+    "static/js/main.ae18e18b.js"
+  ]
+}
