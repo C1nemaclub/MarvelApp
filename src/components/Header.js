@@ -8,7 +8,7 @@ export default function Header() {
       <nav>
         <ul>
           <li>
-            <NavLink activeclassname='active' to='/'>
+            <NavLink activeclassname='active' to='/MarvelApp'>
               Home
             </NavLink>
           </li>

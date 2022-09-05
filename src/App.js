@@ -14,7 +14,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/MarvelApp' element={<Home />} />
           <Route path='/comics'>
             <Route index element={<Comics />} />
             <Route path=':id' element={<SingleComic />} />
