@@ -7,6 +7,5 @@
 *Redux for states control
 *Axios for the API Calls
 
-Live demo: https://marvelplanet.herokuapp.com/
 
 
